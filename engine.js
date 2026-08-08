@@ -1,14 +1,12 @@
 /* ============================================================
-   渲染引擎
+   渲染引擎 V3
    ── 路由、Markdown 渲染、MathJax 排版、进度条、返回顶部
-   ── 依赖：data.js（SITE_CONFIG / ARTICLES / ABOUT_CONTENT）
-            marked.js（Markdown 解析，CDN 加载）
+   ── 异步加载 config.json / articles.json / articles/*.md / about.md
+   ── 依赖：marked.js（Markdown 解析，CDN 加载）
             MathJax（公式渲染，CDN 加载）
    ============================================================ */
-var CONFIG = SITE_CONFIG;
-var ARTICLE_LIST = ARTICLES.sort(function(a, b){
-  return b.date.localeCompare(a.date);
-});
+var CONFIG = null;
+var ARTICLE_LIST = null;
 var currentFilter = 'all';
 var currentSearch = '';
 
@@ -22,6 +20,20 @@ function escapeAttr(s){ return escapeHTML(s); }
 function getCategoryName(id){
   var cat = CONFIG.categories.find(function(c){ return c.id === id; });
   return cat ? cat.name : id;
+}
+
+/* ---- 异步文件加载 ---- */
+function fetchText(url){
+  return fetch(url).then(function(res){
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    return res.text();
+  });
+}
+function fetchJSON(url){
+  return fetch(url).then(function(res){
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    return res.json();
+  });
 }
 
 /* ---- Markdown 渲染 + MathJax 排版 ---- */
@@ -155,6 +167,10 @@ function renderArticle(id){
     return;
   }
 
+  var subtitleHTML = article.subtitle
+    ? '<p class="article-view-subtitle">' + escapeHTML(article.subtitle) + '</p>'
+    : '';
+
   app.innerHTML =
     '<div class="article-view">' +
       '<span class="back-link" onclick="navigate(\'\')">← 返回文章列表</span>' +
@@ -163,12 +179,22 @@ function renderArticle(id){
         '<span class="article-category">' + escapeHTML(getCategoryName(article.category)) + '</span>' +
       '</div>' +
       '<h1 class="article-view-title">' + escapeHTML(article.title) + '</h1>' +
-      '<div class="article-body" id="articleBody"></div>' +
+      subtitleHTML +
+      '<div class="article-body" id="articleBody">' +
+        '<p style="color:var(--muted);font-family:var(--font-sans)">正在加载正文…</p>' +
+      '</div>' +
     '</div>';
 
-  var body = document.getElementById('articleBody');
-  body.innerHTML = renderMarkdown(article.content);
-  typesetMath(body);
+  fetchText('articles/' + article.id + '.md').then(function(content){
+    var body = document.getElementById('articleBody');
+    body.innerHTML = renderMarkdown(content);
+    typesetMath(body);
+    updateProgress();
+  }).catch(function(){
+    var body = document.getElementById('articleBody');
+    body.innerHTML = '<div class="empty-state">正文加载失败：' + escapeHTML(article.id + '.md') + ' 不存在或无法读取。</div>';
+  });
+
   updateProgress();
 }
 
@@ -188,13 +214,22 @@ function renderAbout(){
     '<div class="about-view">' +
       '<span class="back-link" onclick="navigate(\'\')">← 返回文章列表</span>' +
       '<h1 class="about-title">关于</h1>' +
-      '<div class="article-body" id="aboutBody"></div>' +
+      '<div class="article-body" id="aboutBody">' +
+        '<p style="color:var(--muted);font-family:var(--font-sans)">正在加载…</p>' +
+      '</div>' +
       contactHTML +
     '</div>';
 
-  var aboutBody = document.getElementById('aboutBody');
-  aboutBody.innerHTML = renderMarkdown(ABOUT_CONTENT);
-  typesetMath(aboutBody);
+  fetchText('about.md').then(function(content){
+    var aboutBody = document.getElementById('aboutBody');
+    aboutBody.innerHTML = renderMarkdown(content);
+    typesetMath(aboutBody);
+    updateProgress();
+  }).catch(function(){
+    var aboutBody = document.getElementById('aboutBody');
+    aboutBody.innerHTML = '<div class="empty-state">关于页内容加载失败。</div>';
+  });
+
   updateProgress();
 }
 
@@ -237,8 +272,25 @@ window.addEventListener('scroll', function(){
   }
 });
 
-/* ---- 初始化 ---- */
-updateSiteMeta();
-renderFooter();
-window.addEventListener('hashchange', router);
-router();
+/* ---- 初始化（异步加载配置和文章列表） ---- */
+function init(){
+  Promise.all([
+    fetchJSON('config.json'),
+    fetchJSON('articles.json')
+  ]).then(function(results){
+    CONFIG = results[0];
+    ARTICLE_LIST = results[1].sort(function(a, b){
+      return b.date.localeCompare(a.date);
+    });
+
+    updateSiteMeta();
+    renderFooter();
+    window.addEventListener('hashchange', router);
+    router();
+  }).catch(function(){
+    document.getElementById('app').innerHTML =
+      '<div class="empty-state">站点配置加载失败，请检查 config.json 和 articles.json 是否存在。</div>';
+  });
+}
+
+init();

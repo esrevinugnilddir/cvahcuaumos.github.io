@@ -1,0 +1,14 @@
+{
+  "siteName": "cvahcuaumos的个人空间",
+  "tagline": "思考本身，也是思考的起点。",
+  "contact": {
+    "email": "13343752288@163.com"
+  },
+  "footer": "© 2026 cvahcuaumos的个人空间 · 内容均为原创，转载请保留出处",
+  "categories": [
+    { "id": "philosophy", "name": "杂谈" },
+    { "id": "science",    "name": "理工" },
+    { "id": "art",        "name": "艺术" },
+    { "id": "life",       "name": "生活" }
+  ]
+}
