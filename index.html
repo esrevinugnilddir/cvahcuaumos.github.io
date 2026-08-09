@@ -3,12 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>cvahcuaumos的个人空间</title>
+<title>思考者</title>
 <meta name="description" content="思考本身，也是思考的起点。">
-<meta property="og:title" content="cvahcuaumos的个人空间">
+<meta property="og:title" content="思考者">
 <meta property="og:description" content="思考本身，也是思考的起点。">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>LJ</text></svg>">
+
+<!-- 缓存控制：确保 HTML 本身不被缓存，每次访问都获取最新版本 -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>墨</text></svg>">
 
 <!-- 字体 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,8 +35,8 @@
 <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
 
-<!-- 样式 -->
-<link rel="stylesheet" href="https://sfile.chatglm.cn/workspace/file/65/6504285f88.css">
+<!-- 样式（版本号更新后浏览器自动加载最新版） -->
+<link rel="stylesheet" href="style.css?v=v3.1">
 </head>
 <body>
 
@@ -42,7 +47,7 @@
 <nav class="nav">
   <div class="nav-inner">
     <div style="display:flex;align-items:baseline;gap:16px;cursor:pointer" onclick="navigate('')">
-      <span class="nav-brand" id="navHome">cvahcuaumos的个人空间</span>
+      <span class="nav-brand" id="navHome">思考者</span>
       <span class="nav-tagline" id="navTagline">思考本身，也是思考的起点。</span>
     </div>
     <div class="nav-links">
@@ -59,9 +64,9 @@
 <div class="footer" id="footer"></div>
 
 <!-- 返回顶部 -->
-<div class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+<div class="back-to-top" id="backToTop" onclick="safeScrollTo(0,true)">↑</div>
 
-<!-- 渲染引擎（异步加载 config.json / articles.json / articles/*.md / about.md） -->
-<script src="https://sfile.chatglm.cn/workspace/file/a7/a78efb8d1e.js"></script>
+<!-- 渲染引擎（异步加载 config.json / articles.json / articles/*.md / about.md，版本号确保更新同步） -->
+<script src="engine.js?v=v3.1"></script>
 </body>
 </html>
