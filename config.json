@@ -7,7 +7,7 @@
   "footer": "© 2026 cvahcuaumos的个人空间 · 内容均为原创，转载请保留出处",
   "categories": [
     { "id": "philosophy", "name": "杂谈" },
-    { "id": "physics",    "name": "物理" },
-    { "id": "math",        "name": "数学" }
+    { "id": "classical mechanics in sympletic geometry",    "name": "经典力学-辛几何" },
+    { "id": "fibre bundles",        "name": "纤维丛" }
   ]
 }
