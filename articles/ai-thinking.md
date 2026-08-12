@@ -1,4 +1,4 @@
-260530，一些关于AI的思考。原文：[哈佛最年轻华人教授尹希，爆出入职OpenAI！](https://mp.weixin.qq.com/s/Zy_8gYVP4f4hmdcnILplmA)
+260530，一些关于AI的思考。消息来源：[哈佛最年轻华人教授尹希，爆出入职OpenAI！](https://mp.weixin.qq.com/s/Zy_8gYVP4f4hmdcnILplmA)
 
 # 1 人与AI的共存
 
