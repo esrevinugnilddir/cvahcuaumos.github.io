@@ -8,11 +8,11 @@
     "excerpt": "并不是人有思想，而是海量信息通过人进行保存、传递、交互与畸变。当AI开始松动人类的不可替代性，“技术服务于人”便不再是天经地义的结局——它必须是一条被坚守的原则。"
   },
   {
-    "id": "tangent bundles",
+    "id": "tangent-bundles",
     "title": "切丛",
     "subtitle": "纤维丛的入门实例",
     "date": "2026-08-12",
     "category": "fibre bundles",
-    "excerpt": "第一篇纤维丛笔记，以切丛为例建立基本概念，以获得对纤维丛的“感觉”。本文内容几乎照搬M.Nakahara书Geometry, Topology and Physics的9.1节，增加一点个人理解。",
+    "excerpt": "第一篇纤维丛笔记，以切丛为例建立基本概念，以获得对纤维丛的“感觉”。本文内容几乎照搬M.Nakahara书Geometry, Topology and Physics的9.1节，增加一点个人理解。"
   }
 ]
