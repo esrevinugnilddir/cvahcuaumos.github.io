@@ -14,5 +14,21 @@
     "date": "2026-08-12",
     "category": "fibre bundles",
     "excerpt": "第一篇纤维丛笔记，以切丛为例建立基本概念，以获得对纤维丛的“感觉”。本文内容几乎照搬M.Nakahara书Geometry, Topology and Physics的9.1节，增加一点个人理解。"
+  },
+  {
+    "id": "B01-01-The-Road-Not-Taken",
+    "title": "B01-01 未选择的路",
+    "subtitle": " ",
+    "date": "2026-09-09",
+    "category": "meeting",
+    "excerpt": "第一章。"
+  },
+  {
+    "id": "D02-smoke-from-kitchen-chimneys",
+    "title": "D02 炊烟",
+    "subtitle": " ",
+    "date": "2026-09-09",
+    "category": "meeting",
+    "excerpt": "不知道第几章反正是最后一章。"
   }
 ]
