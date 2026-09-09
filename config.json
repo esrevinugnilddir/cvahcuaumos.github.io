@@ -8,6 +8,7 @@
   "categories": [
     { "id": "philosophy", "name": "杂谈" },
     { "id": "classical mechanics in sympletic geometry",    "name": "经典力学-辛几何" },
+    { "id": "meeting",        "name": "《会谈》" },
     { "id": "fibre bundles",        "name": "纤维丛" }
   ]
 }
